@@ -41,7 +41,7 @@ export const siteConfig = {
 
   /* ---------- theme ---------- */
   // Single accent color used throughout. Swap freely.
-  accent: "#C2724A", // muted copper-orange
+  accent: "#E07A3C", // warm orange — pumpkin
   accentName: "ember",
 
   /* ---------- navigation ---------- */

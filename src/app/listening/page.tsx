@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { SpotifyNowPlaying } from "@/components/integrations/SpotifyNowPlaying";
 import { SpotifyTopTracks } from "@/components/integrations/SpotifyTopTracks";
+import { SpotifyTopArtists } from "@/components/integrations/SpotifyTopArtists";
 import { LetterboxdFeed } from "@/components/integrations/LetterboxdFeed";
 import { GitHubFeed } from "@/components/integrations/GitHubFeed";
 import { GitHubStats } from "@/components/integrations/GitHubStats";
@@ -39,16 +40,29 @@ export default function ListeningPage() {
 
       <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-10">
         {siteConfig.integrations.spotify.enabled && (
-          <section>
-            <h2 className="eyebrow mb-3">most-played, last 4 weeks</h2>
-            <Suspense
-              fallback={
-                <p className="font-mono text-xs opacity-50">loading…</p>
-              }
-            >
-              <SpotifyTopTracks />
-            </Suspense>
-          </section>
+          <>
+            <section>
+              <h2 className="eyebrow mb-3">most-played tracks · 4 weeks</h2>
+              <Suspense
+                fallback={
+                  <p className="font-mono text-xs opacity-50">loading…</p>
+                }
+              >
+                <SpotifyTopTracks />
+              </Suspense>
+            </section>
+
+            <section>
+              <h2 className="eyebrow mb-3">most-played artists · 4 weeks</h2>
+              <Suspense
+                fallback={
+                  <p className="font-mono text-xs opacity-50">loading…</p>
+                }
+              >
+                <SpotifyTopArtists />
+              </Suspense>
+            </section>
+          </>
         )}
 
         {siteConfig.integrations.github.enabled && (

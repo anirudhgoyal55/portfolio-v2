@@ -17,9 +17,10 @@
   --color-faint-dark: rgba(232, 230, 224, 0.32);
   --color-rule: rgba(26, 24, 21, 0.10); /* hairline divider on light */
   --color-rule-dark: rgba(232, 230, 224, 0.12);
-  --color-accent: #c2724a; /* muted copper-orange — single accent */
-  --color-accent-soft: rgba(194, 114, 74, 0.10);
-  --color-selection: rgba(194, 114, 74, 0.22);
+  --color-accent: #e07a3c; /* warm orange (pumpkin) — single accent */
+  --color-accent-soft: rgba(224, 122, 60, 0.12);
+  --color-accent-wash: rgba(224, 122, 60, 0.06);
+  --color-selection: rgba(224, 122, 60, 0.25);
 
   /* ---- typography ---- */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -91,6 +92,8 @@ html {
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
   font-size: 15px; /* base — keep small for minimal feel */
+  /* WCAG 2.2 SC 2.4.11: focused elements not hidden by sticky header */
+  scroll-padding-top: 4rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

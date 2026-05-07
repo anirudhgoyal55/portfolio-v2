@@ -46,6 +46,45 @@ All built to be **statically prerendered** wherever possible. Lighthouse-friendl
 
 Live at [v2.anirudhgoel.xyz](https://v2.anirudhgoel.xyz) (the maintainer's personal site).
 
+## 5-minute setup
+
+For a video walkthrough, see [a tutorial run](./CONTRIBUTING.md#forking-for-your-own-portfolio). The condensed path:
+
+```bash
+# 1. clone + install
+git clone https://github.com/anirudhgoyal55/portfolio-v2.git my-site
+cd my-site
+npm install
+
+# 2. open the file you'll edit most and replace identity
+$EDITOR site.config.ts
+
+# 3. run dev — open http://localhost:3000
+npm run dev
+
+# 4. (optional) drop your photo
+cp ~/Pictures/me.jpg public/avatar.jpg
+
+# 5. (optional) Spotify — see "Integrations" below for the OAuth flow
+node scripts/spotify-token.mjs
+
+# 6. deploy via the Vercel button at the top of this README, or:
+npm i -g vercel && vercel
+```
+
+Replace the example MDX in `content/work/` and `content/writing/` with your own. That's the whole tour.
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+| --- | --- | --- |
+| Spotify shows "awaiting auth" forever | Missing or invalid `SPOTIFY_REFRESH_TOKEN` | Re-run `node scripts/spotify-token.mjs`. Verify the redirect URI in the Spotify dashboard is `http://127.0.0.1:8765/callback` (loopback IP, not "localhost"). |
+| OAuth flow errors with "redirect_uri: Not matching configuration" | Spotify dashboard URI doesn't match the script | Use `http://127.0.0.1:8765/callback` in BOTH the Spotify dashboard and the script (script is the default). |
+| Visitor counter never appears | `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` not set | Sign up at console.upstash.com (free tier), create a global Redis DB, copy REST URL + token to `.env.local`. |
+| GitHub stats show as nothing | Username wrong or rate-limited | Verify `siteConfig.integrations.github.username`. Public REST allows 60 req/h unauthenticated; should be plenty for a 1-hour-cached portfolio. |
+| Hydration warning about `user-select` etc. | A browser extension on your machine is mutating spans | Not a code bug. Ignore in dev or test in incognito. |
+| Build fails on Tailwind classes | Stale `.next` cache | `rm -rf .next && npm run build` |
+
 ## Stack
 
 | Layer | Choice |
@@ -111,11 +150,15 @@ SPOTIFY_CLIENT_SECRET=
 SPOTIFY_REFRESH_TOKEN=
 ```
 
+> **Heads up (Feb 2026 Spotify policy):** Web API "Development Mode" apps now require a **Spotify Premium account** on the developer/owner. One client ID per developer. Up to 5 authorized users per app. For a personal portfolio that's fine — you're the only user — but Premium is a hard requirement.
+
 1. Create an app at [developer.spotify.com/dashboard](https://developer.spotify.com/dashboard)
-2. Add redirect URI: `http://127.0.0.1:8765/callback` (use the loopback IP, **not** `localhost` — Spotify's modern policy rejects `http://localhost` for new apps)
+2. Add redirect URI: `http://127.0.0.1:8765/callback` (use the loopback IP, **not** `localhost` — Spotify rejects `http://localhost` since 2024)
 3. Add `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` to `.env.local`
 4. Run `node scripts/spotify-token.mjs` and follow the flow
 5. Paste the printed refresh token into `.env.local` as `SPOTIFY_REFRESH_TOKEN`
+
+The integration shows: now playing → falls back to **last-played** when nothing is currently playing → falls back to a quiet "awaiting auth" hint when no token. Top tracks + top artists appear on `/listening`, refreshed daily.
 
 #### GitHub
 

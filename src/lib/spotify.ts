@@ -17,6 +17,10 @@ const NOW_PLAYING_ENDPOINT =
   "https://api.spotify.com/v1/me/player/currently-playing";
 const TOP_TRACKS_ENDPOINT =
   "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10";
+const TOP_ARTISTS_ENDPOINT =
+  "https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=8";
+const RECENTLY_PLAYED_ENDPOINT =
+  "https://api.spotify.com/v1/me/player/recently-played?limit=1";
 
 export type NowPlaying = {
   isPlaying: boolean;
@@ -25,6 +29,7 @@ export type NowPlaying = {
   album: string;
   albumImageUrl: string;
   songUrl: string;
+  playedAt?: string; // ISO — only set when this came from recently-played
 } | null;
 
 export type TopTrack = {
@@ -33,6 +38,14 @@ export type TopTrack = {
   album: string;
   albumImageUrl: string;
   songUrl: string;
+};
+
+export type TopArtist = {
+  name: string;
+  imageUrl: string;
+  url: string;
+  genres: string[];
+  popularity: number;
 };
 
 function isConfigured(): boolean {
@@ -105,6 +118,77 @@ export async function getNowPlaying(
     };
   } catch {
     return null;
+  }
+}
+
+export async function getLastPlayed(
+  revalidateSeconds = 60,
+): Promise<NowPlaying> {
+  const token = await getAccessToken();
+  if (!token) return null;
+
+  try {
+    const res = await fetch(RECENTLY_PLAYED_ENDPOINT, {
+      headers: { Authorization: `Bearer ${token}` },
+      next: { revalidate: revalidateSeconds, tags: ["spotify-recent"] },
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as {
+      items?: Array<{
+        played_at?: string;
+        track?: {
+          name?: string;
+          artists?: Array<{ name: string }>;
+          album?: { name?: string; images?: Array<{ url: string }> };
+          external_urls?: { spotify?: string };
+        };
+      }>;
+    };
+    const first = data.items?.[0];
+    if (!first?.track) return null;
+    return {
+      isPlaying: false,
+      title: first.track.name ?? "",
+      artist: first.track.artists?.map((a) => a.name).join(", ") ?? "",
+      album: first.track.album?.name ?? "",
+      albumImageUrl: first.track.album?.images?.[0]?.url ?? "",
+      songUrl: first.track.external_urls?.spotify ?? "",
+      playedAt: first.played_at,
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function getTopArtists(
+  revalidateSeconds = 86400,
+): Promise<TopArtist[]> {
+  const token = await getAccessToken();
+  if (!token) return [];
+  try {
+    const res = await fetch(TOP_ARTISTS_ENDPOINT, {
+      headers: { Authorization: `Bearer ${token}` },
+      next: { revalidate: revalidateSeconds, tags: ["spotify-artists"] },
+    });
+    if (!res.ok) return [];
+    const data = (await res.json()) as {
+      items?: Array<{
+        name?: string;
+        images?: Array<{ url: string }>;
+        external_urls?: { spotify?: string };
+        genres?: string[];
+        popularity?: number;
+      }>;
+    };
+    return (data.items ?? []).map((a) => ({
+      name: a.name ?? "",
+      imageUrl: a.images?.[0]?.url ?? "",
+      url: a.external_urls?.spotify ?? "",
+      genres: a.genres ?? [],
+      popularity: a.popularity ?? 0,
+    }));
+  } catch {
+    return [];
   }
 }
 
