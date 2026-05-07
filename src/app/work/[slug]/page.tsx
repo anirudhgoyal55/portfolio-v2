@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Script from "next/script";
 import { getAllWork, getWork } from "@/lib/content";
 import { MDXContent } from "@/components/content/MDXContent";
 import { creativeWorkSchema, breadcrumbSchema } from "@/lib/seo";
@@ -65,16 +64,12 @@ export default async function WorkDetailPage({
 
   return (
     <article className="mx-auto max-w-3xl px-6 md:px-10 py-20 md:py-28">
-      <Script
-        id={`ld-work-${slug}`}
+      <script
         type="application/ld+json"
-        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
       />
-      <Script
-        id={`ld-crumbs-${slug}`}
+      <script
         type="application/ld+json"
-        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
       />
 

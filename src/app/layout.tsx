@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Fraunces, Cinzel } from "next/font/google";
-import Script from "next/script";
 import { siteConfig } from "../../site.config";
 import { personSchema, websiteSchema } from "@/lib/seo";
 import { Providers } from "./providers";
@@ -120,16 +119,12 @@ export default function RootLayout({
     >
       <body className="min-h-dvh flex flex-col">
         <SkipToContent />
-        <Script
-          id="ld-person"
+        <script
           type="application/ld+json"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema()) }}
         />
-        <Script
-          id="ld-website"
+        <script
           type="application/ld+json"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
         />
         <Providers>
