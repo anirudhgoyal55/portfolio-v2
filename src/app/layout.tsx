@@ -5,8 +5,10 @@ import { personSchema, websiteSchema } from "@/lib/seo";
 import { Providers } from "./providers";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { BottomNav } from "@/components/layout/BottomNav";
 import { SkipToContent } from "@/components/layout/SkipToContent";
 import { PageTransition } from "@/components/motion/PageTransition";
+import { BackgroundGrid } from "@/components/motion/BackgroundGrid";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
@@ -120,6 +122,8 @@ export default function RootLayout({
     >
       <body className="min-h-dvh flex flex-col">
         <SkipToContent />
+        <BackgroundGrid />
+        <span aria-hidden className="cursor-spotlight" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema()) }}
@@ -130,10 +134,11 @@ export default function RootLayout({
         />
         <Providers>
           <Header />
-          <main id="main" className="flex-1">
+          <main id="main" className="relative z-10 flex-1 pb-20 md:pb-0">
             <PageTransition>{children}</PageTransition>
           </main>
           <Footer />
+          <BottomNav />
         </Providers>
         <SpeedInsights />
       </body>

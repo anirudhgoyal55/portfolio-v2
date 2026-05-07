@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
 import { LenisProvider } from "@/components/motion/LenisProvider";
 import { CursorHalo } from "@/components/motion/CursorHalo";
+import { CursorSpotlight } from "@/components/motion/CursorSpotlight";
 import { CommandMenu } from "@/components/command/CommandMenu";
 import { KeyboardShortcuts } from "@/components/layout/KeyboardShortcuts";
 import { BackToTop } from "@/components/layout/BackToTop";
@@ -18,6 +19,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     >
       <LenisProvider>
         {children}
+        <CursorSpotlight />
         <CursorHalo />
         <CommandMenu />
         <KeyboardShortcuts />
