@@ -1,267 +1,155 @@
-# Portfolio V2
+# Minimal Folio
 
-A template-grade personal portfolio. Next.js 16, Tailwind v4, MDX content, live data from Spotify / GitHub / Letterboxd, and SEO + AI-discovery as architecture, not afterthought.
+A minimal, opinionated personal portfolio template. Next.js 16, Tailwind v4, MDX content, live data from Spotify and GitHub. MIT licensed — fork it, make it yours, ship.
 
-Originally built as **[Anirudh Goel's](https://anirudhgoel.xyz) personal site**. Open-sourced because the gaps in other portfolio templates were avoidable and worth fixing once, properly.
+**Live demo:** [v2.anirudhgoel.xyz](https://v2.anirudhgoel.xyz)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 ![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
 ![React 19](https://img.shields.io/badge/React-19-149eca?logo=react)
 ![Tailwind v4](https://img.shields.io/badge/Tailwind-v4-38bdf8?logo=tailwindcss)
 
-## One-click deploy
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fanirudhgoel1%2Fminimal-folio&project-name=portfolio&repository-name=portfolio&env=NEXT_PUBLIC_SITE_URL,SPOTIFY_CLIENT_ID,SPOTIFY_CLIENT_SECRET,SPOTIFY_REFRESH_TOKEN,RESEND_API_KEY,CONTACT_EMAIL_TO&envDescription=All%20env%20vars%20are%20optional.%20Each%20integration%20gracefully%20disables%20when%20its%20vars%20are%20missing.&envLink=https%3A%2F%2Fgithub.com%2Fanirudhgoel1%2Fminimal-folio%2Fblob%2Fmain%2F.env.example) [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/anirudhgoel1/minimal-folio)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fanirudhgoyal55%2Ffolio&project-name=portfolio&repository-name=portfolio&env=NEXT_PUBLIC_SITE_URL,SPOTIFY_CLIENT_ID,SPOTIFY_CLIENT_SECRET,SPOTIFY_REFRESH_TOKEN,RESEND_API_KEY,CONTACT_EMAIL_TO&envDescription=All%20env%20vars%20are%20optional.%20Each%20integration%20gracefully%20disables%20when%20its%20vars%20are%20missing.&envLink=https%3A%2F%2Fgithub.com%2Fanirudhgoyal55%2Ffolio%2Fblob%2Fmain%2F.env.example)
+## Why this exists
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/anirudhgoyal55/folio)
+I was on a Framer template. It worked, but every portfolio I actually liked had things mine didn't — live data, real personality, AI-discoverability. Most open-source templates I looked at were either too heavy (full Shadcn dump, dead code, plugins for plugins) or too thin (no SEO, no integrations, no taste). This is what I wanted to find but couldn't, so I built it.
 
-## Features
+If you fork this and make it yours, that's the whole point.
 
-- **Next.js 16** (App Router, Turbopack) + **React 19** + **TypeScript 5**
-- **Tailwind v4** via PostCSS (no config file, `@theme` tokens in CSS)
-- **MDX content** (work + writing) with Shiki syntax highlighting and anchor links
-- **Live integrations**, all optional, all gracefully degrading
-  - Spotify now-playing + top tracks
-  - GitHub recent commits (no auth needed for public profiles)
-  - Letterboxd recently watched (RSS-based)
-- **SEO architecture** — every page ships with proper `<head>`, JSON-LD, OG image, and structured data
-  - Per-page metadata API
-  - Schema.org `Person`, `WebSite`, `Article`, `CreativeWork`, `BreadcrumbList`
-  - Dynamic `opengraph-image.tsx` per route
-  - `sitemap.xml`, `robots.txt`, `manifest.webmanifest`
-- **AI discovery** — `llms.txt` + `ai.txt` so the work gets cited by language models
-- **Multi-format feeds** — RSS (`/feed.xml`), JSON Feed (`/feed.json`), Atom (`/atom.xml`)
-- **Editorial typography** — Fraunces (variable axis), Cinzel for wordmarks, Geist Mono for technical labels
-- **Cmd-K command palette** (cmdk) for navigation, theme switching, copy email
-- **Dark / light / system theme** via `next-themes` with no FOUC
-- **Lenis smooth scroll**, gentle Motion reveals — restrained, not decorative
-- **Accessibility-aware** — skip-to-content, focus rings, `prefers-reduced-motion`, `forced-colors` support
-- **Print stylesheet** so the portfolio prints cleanly (URLs appended after links)
-- **Contact form** with React Hook Form + Zod, server actions, optional Resend delivery, honeypot anti-spam
-- **Security headers** + `.well-known/security.txt`
+## What's in it
 
-All built to be **statically prerendered** wherever possible. Lighthouse-friendly out of the box.
+**The visible stuff:**
 
-## Demo
+- **Live Spotify** showing what's playing right now, last-played fallback when nothing is, top tracks + top artists from the last four weeks
+- **GitHub contribution heatmap** + recent commits + repo and star count
+- **Letterboxd** integration for recently watched films (optional)
+- **MDX content system** for work case studies, a writing section with Shiki syntax highlighting, an experience timeline, and the standard `/now` and `/uses` pages
+- **Editorial typography** — Fraunces variable, Cinzel for the brand mark, Geist Mono for technical bits
+- **Cmd-K palette** for nav, theme switching, copying your email, jumping to social profiles
+- **Cursor halo** that follows the pointer with spring damping (off on touch and reduced-motion)
+- **Smooth page transitions** + a 2px reading-progress bar on long posts
+- **Dark / light / system theme** with no flash on load
 
-Live at [v2.anirudhgoel.xyz](https://v2.anirudhgoel.xyz) (the maintainer's personal site).
+**The stuff developers notice:**
 
-## 5-minute setup
+- Per-page Open Graph images — every project and post gets its own social card with title and description rendered into a 1200×630
+- Full JSON-LD schema across the site (Person, WebSite, Article, CreativeWork, BreadcrumbList)
+- `llms.txt` + `llms-full.txt` + `ai.txt` so AI assistants can find and cite your work
+- Three feed formats — RSS, JSON Feed, Atom
+- Sitemap, robots, manifest, security.txt, humans.txt — all the small files
+- Visitor counter wired to Upstash Redis (free tier, opt-in)
+- Keyboard shortcuts — press `?` to see them, press `T` to toggle theme, press `G` then `H/W/E/R/N/L/U/C` to jump pages
+- Husky + lint-staged pre-commit hooks running ESLint + Prettier
+- GitHub Actions CI running lint + build on every push and PR
+- WCAG 2.2 awareness — focus rings, scroll padding, reduced motion, forced colors, print stylesheet
+- @vercel/speed-insights wired in for real INP / LCP / CLS data when deployed
 
-For a video walkthrough, see [a tutorial run](./CONTRIBUTING.md#forking-for-your-own-portfolio). The condensed path:
+Statically prerendered wherever possible. Lighthouse-friendly out of the box.
 
-```bash
-# 1. clone + install
-git clone https://github.com/anirudhgoyal55/folio.git my-site
-cd my-site
-npm install
-
-# 2. open the file you'll edit most and replace identity
-$EDITOR site.config.ts
-
-# 3. run dev — open http://localhost:3000
-npm run dev
-
-# 4. (optional) drop your photo
-cp ~/Pictures/me.jpg public/avatar.jpg
-
-# 5. (optional) Spotify — see "Integrations" below for the OAuth flow
-node scripts/spotify-token.mjs
-
-# 6. deploy via the Vercel button at the top of this README, or:
-npm i -g vercel && vercel
-```
-
-Replace the example MDX in `content/work/` and `content/writing/` with your own. That's the whole tour.
-
-## Troubleshooting
-
-| Symptom                                                           | Likely cause                                                  | Fix                                                                                                                                                           |
-| ----------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Spotify shows "awaiting auth" forever                             | Missing or invalid `SPOTIFY_REFRESH_TOKEN`                    | Re-run `node scripts/spotify-token.mjs`. Verify the redirect URI in the Spotify dashboard is `http://127.0.0.1:8765/callback` (loopback IP, not "localhost"). |
-| OAuth flow errors with "redirect_uri: Not matching configuration" | Spotify dashboard URI doesn't match the script                | Use `http://127.0.0.1:8765/callback` in BOTH the Spotify dashboard and the script (script is the default).                                                    |
-| Visitor counter never appears                                     | `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` not set | Sign up at console.upstash.com (free tier), create a global Redis DB, copy REST URL + token to `.env.local`.                                                  |
-| GitHub stats show as nothing                                      | Username wrong or rate-limited                                | Verify `siteConfig.integrations.github.username`. Public REST allows 60 req/h unauthenticated; should be plenty for a 1-hour-cached portfolio.                |
-| Hydration warning about `user-select` etc.                        | A browser extension on your machine is mutating spans         | Not a code bug. Ignore in dev or test in incognito.                                                                                                           |
-| Build fails on Tailwind classes                                   | Stale `.next` cache                                           | `rm -rf .next && npm run build`                                                                                                                               |
-
-## Stack
-
-| Layer                    | Choice                                                                                                                |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------- |
-| Framework                | Next.js 16 (App Router)                                                                                               |
-| Language                 | TypeScript 5                                                                                                          |
-| Styling                  | Tailwind CSS v4                                                                                                       |
-| MDX                      | `next-mdx-remote/rsc` + `gray-matter` + `remark-gfm` + `rehype-slug` + `rehype-autolink-headings` + `@shikijs/rehype` |
-| Motion                   | `motion` (Framer Motion v12) + `lenis`                                                                                |
-| Theme                    | `next-themes`                                                                                                         |
-| Form                     | `react-hook-form` + `zod`                                                                                             |
-| Toasts                   | `sonner`                                                                                                              |
-| Command palette          | `cmdk`                                                                                                                |
-| Feeds                    | `feed`                                                                                                                |
-| RSS parsing (Letterboxd) | `rss-parser`                                                                                                          |
-| Email (contact form)     | Resend (optional)                                                                                                     |
-
-## Quick start (forking this template)
+## Make it yours in five minutes
 
 ```bash
 # 1. clone and install
-git clone https://github.com/anirudhgoyal55/folio.git my-site
+git clone https://github.com/anirudhgoel1/minimal-folio.git my-site
 cd my-site
 npm install
-
-# 2. configure your identity
-$EDITOR site.config.ts            # name, role, social, accent, integrations
-
-# 3. replace content
-$EDITOR content/now.mdx
-$EDITOR content/uses.mdx
-$EDITOR content/writing/*.mdx     # delete the example posts, add yours
-$EDITOR content/work/*.mdx        # delete the example work, add yours
-
-# 4. set env vars (all optional)
-cp .env.example .env.local
-$EDITOR .env.local
-
-# 5. run
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
-## Configuration
-
-**Everything user-editable lives in two places:**
-
-1. `site.config.ts` — identity, social links, accent color, navigation, integration toggles, SEO defaults, schema.org Person details
-2. `content/` — all MDX content (work case studies, writing posts, `/now`, `/uses`)
-
-You should not need to touch anything in `src/` to deploy your own version.
-
-### Integrations
-
-Each integration enables itself when its env vars are present, and renders nothing if not. No config gymnastics.
-
-#### Spotify
-
-```env
-SPOTIFY_CLIENT_ID=
-SPOTIFY_CLIENT_SECRET=
-SPOTIFY_REFRESH_TOKEN=
-```
-
-> **Heads up (Feb 2026 Spotify policy):** Web API "Development Mode" apps now require a **Spotify Premium account** on the developer/owner. One client ID per developer. Up to 5 authorized users per app. For a personal portfolio that's fine — you're the only user — but Premium is a hard requirement.
-
-1. Create an app at [developer.spotify.com/dashboard](https://developer.spotify.com/dashboard)
-2. Add redirect URI: `http://127.0.0.1:8765/callback` (use the loopback IP, **not** `localhost` — Spotify rejects `http://localhost` since 2024)
-3. Add `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` to `.env.local`
-4. Run `node scripts/spotify-token.mjs` and follow the flow
-5. Paste the printed refresh token into `.env.local` as `SPOTIFY_REFRESH_TOKEN`
-
-The integration shows: now playing → falls back to **last-played** when nothing is currently playing → falls back to a quiet "awaiting auth" hint when no token. Top tracks + top artists appear on `/listening`, refreshed daily.
-
-#### GitHub
-
-No env vars needed. Edit `siteConfig.integrations.github.username` in `site.config.ts`.
-
-#### Letterboxd
-
-No env vars needed. Set `siteConfig.integrations.letterboxd.enabled = true` and `username` in `site.config.ts`.
-
-#### Resend (contact form delivery)
-
-```env
-RESEND_API_KEY=
-CONTACT_EMAIL_TO=you@example.com
-```
-
-If unset, the contact form shows the user a friendly error and the `mailto:` fallback in the page header still works.
-
-## File structure
-
-```
-folio/
-├── content/
-│   ├── work/                    # project case studies (MDX)
-│   ├── writing/                 # blog posts (MDX)
-│   ├── now.mdx                  # /now page content
-│   └── uses.mdx                 # /uses page content
-├── public/
-│   ├── humans.txt
-│   └── .well-known/security.txt
-├── scripts/
-│   └── spotify-token.mjs        # one-time OAuth helper
-├── src/
-│   ├── app/
-│   │   ├── layout.tsx           # root layout, fonts, metadata, JSON-LD
-│   │   ├── page.tsx             # /
-│   │   ├── work/[slug]/         # /work/* case studies
-│   │   ├── writing/[slug]/      # /writing/* blog posts
-│   │   ├── sitemap.ts
-│   │   ├── robots.ts
-│   │   ├── manifest.ts
-│   │   ├── opengraph-image.tsx  # default OG image
-│   │   ├── icon.tsx             # programmatic favicon
-│   │   ├── llms.txt/route.ts    # AI discovery
-│   │   ├── ai.txt/route.ts      # AI policy
-│   │   ├── feed.xml/route.ts    # RSS
-│   │   ├── feed.json/route.ts   # JSON Feed
-│   │   └── atom.xml/route.ts    # Atom
-│   ├── components/
-│   │   ├── command/             # Cmd+K palette
-│   │   ├── content/             # MDX renderer
-│   │   ├── integrations/        # Spotify, GitHub, Letterboxd
-│   │   ├── layout/              # Header, Footer, ThemeToggle, Skip-to-content
-│   │   ├── motion/              # Lenis, Reveal
-│   │   ├── work/                # ProjectCard
-│   │   └── writing/             # PostCard
-│   ├── lib/
-│   │   ├── content.ts           # MDX loader (work + writing)
-│   │   ├── seo.ts               # JSON-LD builders
-│   │   ├── spotify.ts
-│   │   ├── github.ts
-│   │   ├── letterboxd.ts
-│   │   ├── mdx.tsx              # MDX components (link, img)
-│   │   └── utils.ts
-│   └── app/globals.css          # Tailwind v4 + design tokens
-├── site.config.ts               # the file you'll edit most
-├── next.config.ts
-└── package.json
-```
-
-## Deploy
-
-### Vercel (recommended)
+Open http://localhost:3000. You'll see the demo content.
 
 ```bash
-npm i -g vercel
-vercel
+# 2. become yourself
+$EDITOR site.config.ts        # name, role, email, social, accent color
+cp ~/Pictures/me.jpg public/avatar.jpg
 ```
 
-Set env vars in the Vercel dashboard (or via `vercel env`).
+`site.config.ts` is the only config file you should need to touch. Leave any social platform as `null` and it hides automatically.
 
-### Other hosts
+```mdx
+# 3. add your work
 
-Vercel-specific features used: `next/og` for image generation, edge image optimization. All also work on Netlify, Cloudflare Pages (with OpenNext), and self-hosted Node.
+# create content/work/<slug>.mdx
 
-## Performance + SEO checklist
+---
 
-- [x] All key pages statically prerendered
-- [x] Critical CSS inlined via Next.js
-- [x] Self-hosted fonts (no Google Fonts CDN call at runtime)
-- [x] AVIF + WebP via next/image where used
-- [x] `<title>`, `<meta description>`, OG, Twitter Card on every page
-- [x] Schema.org Person + Article + CreativeWork + BreadcrumbList JSON-LD
-- [x] `sitemap.xml`, `robots.txt`, `humans.txt`, `security.txt`, `manifest.webmanifest`
-- [x] `llms.txt` + `ai.txt` for AI assistant discovery
-- [x] RSS, JSON Feed, Atom for blog
-- [x] Reduced-motion respected (Lenis disabled, Motion variants skipped)
-- [x] WCAG focus rings, skip-to-content, semantic HTML
+title: "Project name"
+description: "One line description."
+year: 2026
+role: "Solo build"
+stack: ["Next.js", "Tailwind"]
+url: "https://your-live-link"
+
+---
+
+Body content in MDX. Headings, links, lists, code blocks all work.
+```
+
+Same frontmatter pattern for `content/writing/*.mdx`, `content/experience/*.mdx`. The site picks them up automatically — no rebuild config to touch.
+
+When you're happy locally, hit the **Deploy with Vercel** button at the top of this README and add your env vars in the dashboard. About ninety seconds to live.
+
+## Integrations
+
+Each one enables itself when its env vars are present. Skip any you don't want — the components return null and the layout stays clean.
+
+**Spotify** — heads up, Spotify changed their developer policy in February 2026, so the developer account on the Spotify app side now needs to be Premium. One-time setup: create an app at [developer.spotify.com/dashboard](https://developer.spotify.com/dashboard), add redirect URI `http://127.0.0.1:8765/callback` (loopback IP, not `localhost`), drop your client ID + secret in `.env.local`, run `node scripts/spotify-token.mjs`, paste the printed refresh token back in. Done.
+
+**GitHub** — no env vars. Set `siteConfig.integrations.github.username` in `site.config.ts` and the heatmap, stats, and recent commits all wire up. Public REST, 60 requests/hour, plenty for a 1-hour-cached portfolio.
+
+**Letterboxd** — no env vars. Set `siteConfig.integrations.letterboxd.{username, enabled}` and recent films appear on `/listening`.
+
+**Resend** — for contact form delivery. Set `RESEND_API_KEY` and `CONTACT_EMAIL_TO`. Without these, the form's mailto fallback still works.
+
+**Upstash Redis** — for the visitor counter. Free tier at [console.upstash.com](https://console.upstash.com). Set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` and the footer counter goes live.
+
+## Folder structure
+
+```
+minimal-folio/
+├── content/                # all MDX — replace with yours
+│   ├── work/               # project case studies
+│   ├── writing/            # blog posts
+│   ├── experience/         # job/role timeline
+│   ├── now.mdx             # what you're working on now
+│   └── uses.mdx            # hardware + software
+├── public/                 # avatar, favicons, .well-known/
+├── site.config.ts          # the file you'll edit most
+├── src/                    # template machinery — you mostly won't touch this
+└── scripts/                # Spotify OAuth helper
+```
+
+## Stack
+
+Next.js 16 (App Router) · React 19 · TypeScript 5 · Tailwind CSS v4 · MDX (`next-mdx-remote/rsc` + Shiki) · Motion 12 · Lenis · next-themes · cmdk · feed · zod · react-hook-form
+
+Slim by intent — under 25 production dependencies, no Shadcn dump, no UI kit, no hidden bloat.
+
+## Troubleshooting
+
+| What you see                                                 | Why                                        | Fix                                                                                                                                |
+| ------------------------------------------------------------ | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Spotify shows "awaiting auth" forever                        | Missing or invalid `SPOTIFY_REFRESH_TOKEN` | Re-run `node scripts/spotify-token.mjs`. Make sure the redirect URI in your Spotify dashboard is `http://127.0.0.1:8765/callback`. |
+| OAuth errors with "redirect_uri: Not matching configuration" | The dashboard URI doesn't match the script | Use `http://127.0.0.1:8765/callback` in both.                                                                                      |
+| Visitor counter doesn't appear                               | Upstash env vars missing                   | Sign up at console.upstash.com (free) or just don't bother — the rest works.                                                       |
+| GitHub stats are blank                                       | Wrong username or rate limit               | Verify `siteConfig.integrations.github.username`.                                                                                  |
+| Hydration warning about `user-select`                        | A browser extension is mutating your spans | Not a code bug. Test in incognito to confirm.                                                                                      |
+| Tailwind classes look wrong                                  | Stale `.next` cache                        | `rm -rf .next && npm run build`                                                                                                    |
 
 ## License
 
-MIT. See [LICENSE](./LICENSE).
+MIT. See [LICENSE](./LICENSE). Use it however you want — commercial, personal, fork-and-sell, learning. The only requirement is keeping the LICENSE file when you redistribute.
+
+If this template is useful to you, a star is appreciated but not required. A link in your footer is appreciated even more.
 
 ## Acknowledgements
 
-Inspired by [ramx.in](https://ramx.in) and the [`sleek-portfolio`](https://github.com/ramxcodes/sleek-portfolio) template that started this rebuild, plus [leerob.io](https://leerob.io), [brittanychiang.com](https://brittanychiang.com), [rauno.me](https://rauno.me), [nownownow.com](https://nownownow.com), [uses.tech](https://uses.tech), and [llmstxt.org](https://llmstxt.org).
+- [ramx.in](https://ramx.in) — the kick that started this rebuild
+- [leerob.io](https://leerob.io) — for showing what live portfolio data could look like
+- [brittanychiang.com](https://brittanychiang.com) — editorial restraint at scale
+- [rauno.me](https://rauno.me) — interaction design at the millimeter
+- [nownownow.com](https://nownownow.com) and [uses.tech](https://uses.tech) — the page conventions
+- [llmstxt.org](https://llmstxt.org) — discoverability for AI assistants
+
+If you ship something with this, I'd love to see it. Drop a link in an issue or tag me on socials.

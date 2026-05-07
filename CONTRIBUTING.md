@@ -83,13 +83,13 @@ Each integration enables itself when its env vars are present, and renders nothi
 
 Copy `.env.example` to `.env.local` and fill in what you want:
 
-| Integration | Env vars | Setup |
-| --- | --- | --- |
+| Integration                                            | Env vars                                                              | Setup                                                                                                                                            |
+| ------------------------------------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Spotify (now playing, last played, top tracks/artists) | `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN` | See README. **Requires a Spotify Premium account on the developer (Feb 2026 policy).** Use `http://127.0.0.1:8765/callback` as the redirect URI. |
-| GitHub (recent commits, repo + star count) | none — public REST | Set `siteConfig.integrations.github.username` |
-| Letterboxd (recently watched) | none — public RSS | Set `siteConfig.integrations.letterboxd.{enabled,username}` |
-| Resend (contact form delivery) | `RESEND_API_KEY`, `CONTACT_EMAIL_TO` | Free tier at resend.com |
-| Visitor counter | `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` | Free tier at console.upstash.com |
+| GitHub (recent commits, repo + star count)             | none — public REST                                                    | Set `siteConfig.integrations.github.username`                                                                                                    |
+| Letterboxd (recently watched)                          | none — public RSS                                                     | Set `siteConfig.integrations.letterboxd.{enabled,username}`                                                                                      |
+| Resend (contact form delivery)                         | `RESEND_API_KEY`, `CONTACT_EMAIL_TO`                                  | Free tier at resend.com                                                                                                                          |
+| Visitor counter                                        | `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`                  | Free tier at console.upstash.com                                                                                                                 |
 
 ### 5. Deploy
 
@@ -110,8 +110,8 @@ Bug fixes and small improvements are welcome. Larger features should open an iss
 ### Local setup
 
 ```bash
-git clone https://github.com/anirudhgoyal55/portfolio-v2.git
-cd portfolio-v2
+git clone https://github.com/anirudhgoel1/minimal-folio.git
+cd minimal-folio
 npm install
 npm run dev
 ```
@@ -149,7 +149,7 @@ dedupes per-day via localStorage. Renders nothing without env vars.
 
 ### Reporting issues
 
-Use [GitHub Issues](https://github.com/anirudhgoyal55/portfolio-v2/issues). Include:
+Use [GitHub Issues](https://github.com/anirudhgoel1/minimal-folio/issues). Include:
 
 - Browser + OS (where applicable)
 - Reproduction steps

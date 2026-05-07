@@ -27,7 +27,7 @@ export const siteConfig = {
   social: {
     linkedin: "https://www.linkedin.com/in/anirudhgoel1/",
     instagram: "https://instagram.com/anirudh.nocode",
-    github: "https://github.com/anirudhgoyal55",
+    github: "https://github.com/anirudhgoel1",
     twitter: null as string | null,
     bluesky: null as string | null,
     threads: null as string | null,
@@ -67,7 +67,7 @@ export const siteConfig = {
     },
     github: {
       enabled: true,
-      username: "anirudhgoyal55",
+      username: "anirudhgoel1",
       revalidateSeconds: 600,
     },
     letterboxd: {
