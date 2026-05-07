@@ -11,9 +11,9 @@ Originally built as **[Anirudh Goel's](https://anirudhgoel.xyz) personal site**.
 
 ## One-click deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fanirudhgoyal55%2Fportfolio-v2&project-name=portfolio&repository-name=portfolio&env=NEXT_PUBLIC_SITE_URL,SPOTIFY_CLIENT_ID,SPOTIFY_CLIENT_SECRET,SPOTIFY_REFRESH_TOKEN,RESEND_API_KEY,CONTACT_EMAIL_TO&envDescription=All%20env%20vars%20are%20optional.%20Each%20integration%20gracefully%20disables%20when%20its%20vars%20are%20missing.&envLink=https%3A%2F%2Fgithub.com%2Fanirudhgoyal55%2Fportfolio-v2%2Fblob%2Fmain%2F.env.example)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fanirudhgoyal55%2Ffolio&project-name=portfolio&repository-name=portfolio&env=NEXT_PUBLIC_SITE_URL,SPOTIFY_CLIENT_ID,SPOTIFY_CLIENT_SECRET,SPOTIFY_REFRESH_TOKEN,RESEND_API_KEY,CONTACT_EMAIL_TO&envDescription=All%20env%20vars%20are%20optional.%20Each%20integration%20gracefully%20disables%20when%20its%20vars%20are%20missing.&envLink=https%3A%2F%2Fgithub.com%2Fanirudhgoyal55%2Ffolio%2Fblob%2Fmain%2F.env.example)
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/anirudhgoyal55/portfolio-v2)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/anirudhgoyal55/folio)
 
 ## Features
 
@@ -52,7 +52,7 @@ For a video walkthrough, see [a tutorial run](./CONTRIBUTING.md#forking-for-your
 
 ```bash
 # 1. clone + install
-git clone https://github.com/anirudhgoyal55/portfolio-v2.git my-site
+git clone https://github.com/anirudhgoyal55/folio.git my-site
 cd my-site
 npm install
 
@@ -76,37 +76,37 @@ Replace the example MDX in `content/work/` and `content/writing/` with your own.
 
 ## Troubleshooting
 
-| Symptom | Likely cause | Fix |
-| --- | --- | --- |
-| Spotify shows "awaiting auth" forever | Missing or invalid `SPOTIFY_REFRESH_TOKEN` | Re-run `node scripts/spotify-token.mjs`. Verify the redirect URI in the Spotify dashboard is `http://127.0.0.1:8765/callback` (loopback IP, not "localhost"). |
-| OAuth flow errors with "redirect_uri: Not matching configuration" | Spotify dashboard URI doesn't match the script | Use `http://127.0.0.1:8765/callback` in BOTH the Spotify dashboard and the script (script is the default). |
-| Visitor counter never appears | `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` not set | Sign up at console.upstash.com (free tier), create a global Redis DB, copy REST URL + token to `.env.local`. |
-| GitHub stats show as nothing | Username wrong or rate-limited | Verify `siteConfig.integrations.github.username`. Public REST allows 60 req/h unauthenticated; should be plenty for a 1-hour-cached portfolio. |
-| Hydration warning about `user-select` etc. | A browser extension on your machine is mutating spans | Not a code bug. Ignore in dev or test in incognito. |
-| Build fails on Tailwind classes | Stale `.next` cache | `rm -rf .next && npm run build` |
+| Symptom                                                           | Likely cause                                                  | Fix                                                                                                                                                           |
+| ----------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Spotify shows "awaiting auth" forever                             | Missing or invalid `SPOTIFY_REFRESH_TOKEN`                    | Re-run `node scripts/spotify-token.mjs`. Verify the redirect URI in the Spotify dashboard is `http://127.0.0.1:8765/callback` (loopback IP, not "localhost"). |
+| OAuth flow errors with "redirect_uri: Not matching configuration" | Spotify dashboard URI doesn't match the script                | Use `http://127.0.0.1:8765/callback` in BOTH the Spotify dashboard and the script (script is the default).                                                    |
+| Visitor counter never appears                                     | `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` not set | Sign up at console.upstash.com (free tier), create a global Redis DB, copy REST URL + token to `.env.local`.                                                  |
+| GitHub stats show as nothing                                      | Username wrong or rate-limited                                | Verify `siteConfig.integrations.github.username`. Public REST allows 60 req/h unauthenticated; should be plenty for a 1-hour-cached portfolio.                |
+| Hydration warning about `user-select` etc.                        | A browser extension on your machine is mutating spans         | Not a code bug. Ignore in dev or test in incognito.                                                                                                           |
+| Build fails on Tailwind classes                                   | Stale `.next` cache                                           | `rm -rf .next && npm run build`                                                                                                                               |
 
 ## Stack
 
-| Layer | Choice |
-| --- | --- |
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript 5 |
-| Styling | Tailwind CSS v4 |
-| MDX | `next-mdx-remote/rsc` + `gray-matter` + `remark-gfm` + `rehype-slug` + `rehype-autolink-headings` + `@shikijs/rehype` |
-| Motion | `motion` (Framer Motion v12) + `lenis` |
-| Theme | `next-themes` |
-| Form | `react-hook-form` + `zod` |
-| Toasts | `sonner` |
-| Command palette | `cmdk` |
-| Feeds | `feed` |
-| RSS parsing (Letterboxd) | `rss-parser` |
-| Email (contact form) | Resend (optional) |
+| Layer                    | Choice                                                                                                                |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| Framework                | Next.js 16 (App Router)                                                                                               |
+| Language                 | TypeScript 5                                                                                                          |
+| Styling                  | Tailwind CSS v4                                                                                                       |
+| MDX                      | `next-mdx-remote/rsc` + `gray-matter` + `remark-gfm` + `rehype-slug` + `rehype-autolink-headings` + `@shikijs/rehype` |
+| Motion                   | `motion` (Framer Motion v12) + `lenis`                                                                                |
+| Theme                    | `next-themes`                                                                                                         |
+| Form                     | `react-hook-form` + `zod`                                                                                             |
+| Toasts                   | `sonner`                                                                                                              |
+| Command palette          | `cmdk`                                                                                                                |
+| Feeds                    | `feed`                                                                                                                |
+| RSS parsing (Letterboxd) | `rss-parser`                                                                                                          |
+| Email (contact form)     | Resend (optional)                                                                                                     |
 
 ## Quick start (forking this template)
 
 ```bash
 # 1. clone and install
-git clone https://github.com/your/portfolio-v2.git my-site
+git clone https://github.com/anirudhgoyal55/folio.git my-site
 cd my-site
 npm install
 
@@ -180,7 +180,7 @@ If unset, the contact form shows the user a friendly error and the `mailto:` fal
 ## File structure
 
 ```
-portfolio-v2/
+folio/
 ├── content/
 │   ├── work/                    # project case studies (MDX)
 │   ├── writing/                 # blog posts (MDX)
