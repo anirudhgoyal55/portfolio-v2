@@ -1,0 +1,29 @@
+---
+title: "Pavilion"
+description: "An IPL fan dashboard. Live scores, momentum, and team intel that hits ~70K Instagram views in a few weeks."
+year: 2026
+role: "Solo build"
+stack: ["FastAPI", "Vanilla JS", "Canvas 2D", "Cloudflare Workers"]
+url: "https://pavilion.anirudhgoel.xyz"
+github: "https://github.com/anirudhgoyal55/IPL-Dashboard"
+status: "live"
+featured: true
+order: 1
+---
+
+Pavilion started as a personal weekend project: build an IPL dashboard that feels like a broadcast graphic, not a stat table. Big team color, big numerals, scoreboard energy. Within a few weeks the live build hit roughly seventy thousand Instagram views and a creator reached out to license a similar engine for their own platform.
+
+## The brief, by accident
+
+I wanted to watch IPL with the data I cared about. Run rate, required rate, win probability, the moment the chase tilts. The networks bury this stuff. So I built it.
+
+## What it does
+
+- Live scores pulled from cricapi, cross-checked against Wikipedia
+- A "team-wrap" visual identity (full-bleed franchise color, never letterboxed)
+- An ambient ticker mode for second-screen viewing
+- Generated share cards that look right at thumbnail scale
+
+## What I'd write more about
+
+The shift from FastAPI backend to a pure-static front-end deployed on Cloudflare Workers (manual deploys via Wrangler), and the data refresh discipline I had to build in to avoid mocked numbers ever leaking into prod.

@@ -1,0 +1,4 @@
+Contact: mailto:hello@anirudhgoel.xyz
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://v2.anirudhgoel.xyz/.well-known/security.txt

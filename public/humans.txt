@@ -1,0 +1,14 @@
+/* TEAM */
+  Designer & Developer: Anirudh Goel
+  Site: https://anirudhgoel.xyz
+  LinkedIn: anirudhgoel1
+  Instagram: @anirudh.nocode
+
+/* SITE */
+  Last update: 2026/05
+  Standards: HTML5, CSS3
+  Components: Next.js 16, React 19, Tailwind CSS v4
+  Software: VS Code
+
+/* THANKS */
+  Inspired by ramx.in, leerob.io, brittanychiang.com
