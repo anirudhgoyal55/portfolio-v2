@@ -1,33 +1,54 @@
 import Link from "next/link";
 import { siteConfig } from "../../../site.config";
 import { VisitorCounter } from "./VisitorCounter";
+import { SocialIcon, type SocialPlatform } from "./SocialIcon";
+
+const PLATFORM_LABELS: Record<SocialPlatform, string> = {
+  linkedin: "LinkedIn",
+  instagram: "Instagram",
+  github: "GitHub",
+  twitter: "X",
+  bluesky: "Bluesky",
+  threads: "Threads",
+  youtube: "YouTube",
+  readcv: "Read.cv",
+  behance: "Behance",
+  dribbble: "Dribbble",
+  letterboxd: "Letterboxd",
+  email: "Email",
+  rss: "RSS",
+};
 
 export function Footer() {
   const year = new Date().getFullYear();
-  const socials = [
-    siteConfig.social.linkedin && {
-      href: siteConfig.social.linkedin,
-      label: "LinkedIn",
-    },
-    siteConfig.social.instagram && {
-      href: siteConfig.social.instagram,
-      label: "Instagram",
-    },
-    siteConfig.social.github && {
-      href: siteConfig.social.github,
-      label: "GitHub",
-    },
-    siteConfig.social.letterboxd && {
-      href: siteConfig.social.letterboxd,
-      label: "Letterboxd",
-    },
-  ].filter((x): x is { href: string; label: string } => Boolean(x));
+
+  // Build the visible socials in display order
+  const socialOrder: SocialPlatform[] = [
+    "linkedin",
+    "instagram",
+    "github",
+    "twitter",
+    "bluesky",
+    "threads",
+    "youtube",
+    "readcv",
+    "behance",
+    "dribbble",
+    "letterboxd",
+  ];
+
+  const socials = socialOrder
+    .map((platform) => {
+      const value = siteConfig.social[platform as keyof typeof siteConfig.social];
+      return value ? { platform, href: value as string } : null;
+    })
+    .filter((x): x is { platform: SocialPlatform; href: string } => Boolean(x));
 
   return (
     <footer className="hairline mt-32">
       <div className="mx-auto max-w-4xl px-6 md:px-10 py-14">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-          <div className="md:col-span-5">
+          <div className="md:col-span-6">
             <p className="eyebrow">colophon</p>
             <p className="mt-3 font-serif text-[15px] leading-relaxed max-w-md">
               Built with Next.js 16 and Tailwind v4. Type set in Fraunces and
@@ -42,35 +63,44 @@ export function Footer() {
               </a>
               .
             </p>
-          </div>
 
-          <div className="md:col-span-3">
-            <p className="eyebrow">elsewhere</p>
-            <ul className="mt-3 space-y-1.5">
+            {/* Social icons — clean row, accent on hover */}
+            <ul className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
               {socials.map((s) => (
-                <li key={s.href}>
+                <li key={s.platform}>
                   <a
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="link-underline text-sm"
+                    aria-label={PLATFORM_LABELS[s.platform]}
+                    className="inline-flex items-center justify-center w-8 h-8 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
                   >
-                    {s.label}
+                    <SocialIcon platform={s.platform} size={15} />
                   </a>
                 </li>
               ))}
               <li>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="link-underline text-sm"
+                  aria-label="Email"
+                  className="inline-flex items-center justify-center w-8 h-8 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
                 >
-                  Email
+                  <SocialIcon platform="email" size={15} />
                 </a>
+              </li>
+              <li>
+                <Link
+                  href="/feed.xml"
+                  aria-label="RSS feed"
+                  className="inline-flex items-center justify-center w-8 h-8 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
+                >
+                  <SocialIcon platform="rss" size={15} />
+                </Link>
               </li>
             </ul>
           </div>
 
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <p className="eyebrow">subscribe</p>
             <ul className="mt-3 space-y-1.5">
               <li>
@@ -91,7 +121,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <p className="eyebrow">site</p>
             <ul className="mt-3 space-y-1.5">
               <li>

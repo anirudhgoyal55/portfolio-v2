@@ -1,12 +1,13 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
 /**
- * Wraps page content in an AnimatePresence so client-side route changes
- * fade-up softly. Pairs with CSS view-transitions for hard navs.
+ * Soft fade-up on every client navigation.
+ * No exit animation — clicks feel snappy. New route mounts immediately
+ * and animates in over 0.28s. Hard navs are covered by CSS @view-transition.
  */
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -15,19 +16,13 @@ export function PageTransition({ children }: { children: ReactNode }) {
   if (reduce) return <>{children}</>;
 
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.div
-        key={pathname}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -6 }}
-        transition={{
-          duration: 0.32,
-          ease: [0.16, 1, 0.3, 1],
-        }}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      key={pathname}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
   );
 }

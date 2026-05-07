@@ -3,6 +3,7 @@ import { siteConfig } from "../../../site.config";
 import { ThemeToggle } from "./ThemeToggle";
 import { CommandTrigger } from "../command/CommandTrigger";
 import { MonogramMark } from "./MonogramMark";
+import { NavLinks } from "./NavLinks";
 
 export function Header() {
   return (
@@ -17,20 +18,7 @@ export function Header() {
             <MonogramMark size={26} />
           </Link>
 
-          <nav
-            aria-label="Primary"
-            className="hidden md:flex items-center gap-7"
-          >
-            {siteConfig.nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="font-mono text-[11px] lowercase tracking-wide opacity-65 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
-              >
-                {item.label.toLowerCase()}
-              </Link>
-            ))}
-          </nav>
+          <NavLinks />
 
           <div className="flex items-center gap-4">
             <CommandTrigger />
@@ -39,20 +27,10 @@ export function Header() {
         </div>
 
         {/* mobile nav */}
-        <nav
-          aria-label="Primary mobile"
+        <NavLinks
           className="md:hidden flex flex-wrap items-center gap-x-5 gap-y-2 pb-3"
-        >
-          {siteConfig.nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="font-mono text-[11px] lowercase tracking-wide opacity-65 hover:opacity-100"
-            >
-              {item.label.toLowerCase()}
-            </Link>
-          ))}
-        </nav>
+          itemClassName="font-mono text-[11px] lowercase tracking-wide"
+        />
       </div>
     </header>
   );

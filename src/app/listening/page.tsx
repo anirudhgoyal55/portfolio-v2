@@ -5,6 +5,7 @@ import { SpotifyNowPlaying } from "@/components/integrations/SpotifyNowPlaying";
 import { SpotifyTopTracks } from "@/components/integrations/SpotifyTopTracks";
 import { LetterboxdFeed } from "@/components/integrations/LetterboxdFeed";
 import { GitHubFeed } from "@/components/integrations/GitHubFeed";
+import { GitHubStats } from "@/components/integrations/GitHubStats";
 import { PostCard } from "@/components/writing/PostCard";
 import { siteConfig } from "../../../site.config";
 import { getWritingByTag } from "@/lib/content";
@@ -53,13 +54,18 @@ export default function ListeningPage() {
         {siteConfig.integrations.github.enabled && (
           <section>
             <h2 className="eyebrow mb-3">recent commits</h2>
-            <Suspense
-              fallback={
-                <p className="font-mono text-xs opacity-50">loading…</p>
-              }
-            >
-              <GitHubFeed />
+            <Suspense fallback={null}>
+              <GitHubStats />
             </Suspense>
+            <div className="mt-4">
+              <Suspense
+                fallback={
+                  <p className="font-mono text-xs opacity-50">loading…</p>
+                }
+              >
+                <GitHubFeed />
+              </Suspense>
+            </div>
           </section>
         )}
       </div>

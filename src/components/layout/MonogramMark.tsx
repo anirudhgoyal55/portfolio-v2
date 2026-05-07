@@ -13,11 +13,12 @@ export function MonogramMark({
   return (
     <span
       aria-hidden
+      suppressHydrationWarning
       className={`inline-flex items-center justify-center rounded-full bg-[color:var(--color-accent)] text-[#FBFBFA] font-serif italic leading-none select-none ${className}`}
       style={{
-        width: size,
-        height: size,
-        fontSize: size * 0.55,
+        width: `${size}px`,
+        height: `${size}px`,
+        fontSize: `${(size * 0.55).toFixed(1)}px`,
         fontVariationSettings: '"opsz" 144, "SOFT" 80',
       }}
     >
