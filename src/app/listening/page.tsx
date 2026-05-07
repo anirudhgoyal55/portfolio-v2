@@ -21,7 +21,7 @@ export default function ListeningPage() {
   const musicEssays = getWritingByTag("music");
 
   return (
-    <div className="mx-auto max-w-4xl px-6 md:px-10 py-16 md:py-20">
+    <div className="mx-auto max-w-3xl px-5 md:px-8 py-12 md:py-16">
       <p className="eyebrow">live</p>
       <h1 className="mt-3 font-serif text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-[-0.01em]">
         Listening, watching, shipping

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function WritingIndexPage() {
   const posts = getAllWriting();
   return (
-    <div className="mx-auto max-w-4xl px-6 md:px-10 py-16 md:py-20">
+    <div className="mx-auto max-w-3xl px-5 md:px-8 py-12 md:py-16">
       <Reveal>
         <p className="eyebrow">writing / {String(posts.length).padStart(2, "0")}</p>
       </Reveal>

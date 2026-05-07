@@ -5,29 +5,32 @@ import { usePathname } from "next/navigation";
 import { siteConfig } from "../../../site.config";
 
 /**
- * Nav links with active-state indicator. A subtle accent dot precedes the
- * label of the current section.
+ * Desktop nav. Home is always first. Active section gets the accent
+ * color and a tiny accent dot.
  */
 export function NavLinks({
-  className = "hidden md:flex items-center gap-7",
+  className = "hidden md:flex items-center gap-6",
   itemClassName = "font-mono text-[11px] lowercase tracking-wide",
 }: {
   className?: string;
   itemClassName?: string;
 }) {
   const pathname = usePathname();
+  const items = [{ href: "/", label: "Home" }, ...siteConfig.nav];
 
   return (
     <nav aria-label="Primary" className={className}>
-      {siteConfig.nav.map((item) => {
+      {items.map((item) => {
         const isActive =
-          pathname === item.href || pathname.startsWith(`${item.href}/`);
+          item.href === "/"
+            ? pathname === "/"
+            : pathname === item.href || pathname.startsWith(`${item.href}/`);
         return (
           <Link
             key={item.href}
             href={item.href}
             aria-current={isActive ? "page" : undefined}
-            className={`${itemClassName} relative inline-flex items-center gap-1.5 transition-all ${
+            className={`${itemClassName} relative inline-flex items-center gap-1.5 transition-all active:scale-[0.97] ${
               isActive
                 ? "text-[color:var(--color-accent)] opacity-100"
                 : "opacity-65 hover:opacity-100 hover:text-[color:var(--color-accent)]"

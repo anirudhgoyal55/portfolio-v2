@@ -6,7 +6,7 @@ export function PostCard({ post }: { post: Writing }) {
   return (
     <Link
       href={`/writing/${post.slug}`}
-      className="group block hairline-bottom py-5 px-3 -mx-3 rounded-sm transition-colors hover:bg-[color:var(--color-accent-wash)]"
+      className="group block hairline-bottom py-5 px-3 -mx-3 rounded-sm transition-all active:scale-[0.99] hover:bg-[color:var(--color-accent-wash)]"
     >
       <div className="grid grid-cols-12 items-baseline gap-4">
         <time

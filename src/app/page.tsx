@@ -9,6 +9,7 @@ import { Avatar } from "@/components/layout/Avatar";
 import { SocialIcon, type SocialPlatform } from "@/components/layout/SocialIcon";
 import { Reveal } from "@/components/motion/Reveal";
 import { ScrollHero } from "@/components/motion/ScrollHero";
+import { LiveTicker } from "@/components/home/LiveTicker";
 
 const HERO_SOCIAL_ORDER: SocialPlatform[] = [
   "linkedin",
@@ -45,49 +46,44 @@ export default function HomePage() {
   }).filter((x): x is { platform: SocialPlatform; href: string } => Boolean(x));
 
   return (
-    <div className="mx-auto max-w-4xl px-6 md:px-10">
-      {/* HERO */}
-      <section className="pt-10 md:pt-16 pb-12 md:pb-16">
-        {/* Avatar + name + role on a single row, with subtle scroll-link */}
+    <div className="mx-auto max-w-3xl px-5 md:px-8">
+      {/* HERO — tight, single-screen on most viewports */}
+      <section className="pt-8 md:pt-12 pb-10">
         <ScrollHero>
           <Reveal>
-            <header className="flex items-center gap-5">
+            <header className="flex items-center gap-4">
               <Avatar
-                size={84}
+                size={72}
                 alt={siteConfig.name}
                 className="shrink-0 ring-1 ring-[color:var(--color-border)]"
               />
               <div className="min-w-0">
-                <h1 className="font-serif text-[clamp(1.75rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.01em]">
+                <h1 className="font-serif text-[clamp(1.625rem,4vw,2.5rem)] leading-[1.05] tracking-[-0.01em]">
                   {siteConfig.name}.
                 </h1>
-                <p className="mt-1 text-sm sm:text-base opacity-70">
-                  {siteConfig.role}.
-                </p>
+                <p className="mt-0.5 text-sm opacity-70">{siteConfig.role}.</p>
               </div>
             </header>
           </Reveal>
         </ScrollHero>
 
-        {/* Tagline */}
-        <Reveal delay={0.08}>
-          <p className="mt-6 max-w-xl text-base opacity-80 leading-relaxed">
+        <Reveal delay={0.06}>
+          <p className="mt-5 max-w-xl text-[15px] opacity-80 leading-relaxed">
             {siteConfig.tagline}
           </p>
         </Reveal>
 
-        {/* CTAs + social row */}
-        <Reveal delay={0.14}>
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+        <Reveal delay={0.1}>
+          <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
             <Link
               href="/work"
-              className="link-underline link-accent text-sm"
+              className="link-underline link-accent text-sm transition-transform active:scale-[0.97]"
             >
               See the work
             </Link>
             <Link
               href="/contact"
-              className="link-underline text-sm opacity-80"
+              className="link-underline text-sm opacity-80 transition-transform active:scale-[0.97]"
             >
               Get in touch
             </Link>
@@ -95,7 +91,7 @@ export default function HomePage() {
               aria-hidden
               className="hidden sm:inline-block w-px h-3 bg-[color:var(--color-border)]"
             />
-            <ul className="flex items-center gap-1 -mx-1">
+            <ul className="flex items-center gap-0.5 -mx-1">
               {heroSocials.map((s) => (
                 <li key={s.platform}>
                   <a
@@ -103,7 +99,7 @@ export default function HomePage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={HERO_SOCIAL_LABELS[s.platform]}
-                    className="inline-flex items-center justify-center w-7 h-7 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
+                    className="inline-flex items-center justify-center w-7 h-7 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all active:scale-[0.92]"
                   >
                     <SocialIcon platform={s.platform} size={14} />
                   </a>
@@ -113,7 +109,7 @@ export default function HomePage() {
                 <a
                   href={`mailto:${siteConfig.email}`}
                   aria-label="Email"
-                  className="inline-flex items-center justify-center w-7 h-7 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
+                  className="inline-flex items-center justify-center w-7 h-7 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all active:scale-[0.92]"
                 >
                   <SocialIcon platform="email" size={14} />
                 </a>
@@ -122,9 +118,15 @@ export default function HomePage() {
           </div>
         </Reveal>
 
-        {/* Live Spotify presence */}
-        <Reveal delay={0.24}>
-          <div className="mt-10">
+        {/* Live ticker — rotating live signal */}
+        <Reveal delay={0.16}>
+          <div className="mt-6 hairline pt-4">
+            <LiveTicker />
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.2}>
+          <div className="mt-4">
             <Suspense fallback={null}>
               <SpotifyNowPlaying />
             </Suspense>
@@ -132,15 +134,14 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      {/* FEATURED WORK */}
       {featured.length > 0 && (
-        <section className="py-12 hairline">
+        <section className="py-8 hairline">
           <Reveal>
-            <div className="flex items-baseline justify-between mb-4">
-              <h2 className="font-serif text-xl">Selected work</h2>
+            <div className="flex items-baseline justify-between mb-3">
+              <h2 className="font-serif text-lg">Selected work</h2>
               <Link
                 href="/work"
-                className="font-mono text-[11px] lowercase opacity-60 hover:opacity-100"
+                className="font-mono text-[11px] lowercase opacity-60 hover:opacity-100 transition-opacity"
               >
                 all projects →
               </Link>
@@ -154,15 +155,14 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* RECENT WRITING */}
       {recentWriting.length > 0 && (
-        <section className="py-12 hairline">
+        <section className="py-8 hairline">
           <Reveal>
-            <div className="flex items-baseline justify-between mb-4">
-              <h2 className="font-serif text-xl">Recent writing</h2>
+            <div className="flex items-baseline justify-between mb-3">
+              <h2 className="font-serif text-lg">Recent writing</h2>
               <Link
                 href="/writing"
-                className="font-mono text-[11px] lowercase opacity-60 hover:opacity-100"
+                className="font-mono text-[11px] lowercase opacity-60 hover:opacity-100 transition-opacity"
               >
                 all posts →
               </Link>

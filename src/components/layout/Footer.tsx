@@ -46,8 +46,8 @@ export function Footer() {
     .filter((x): x is { platform: SocialPlatform; href: string } => Boolean(x));
 
   return (
-    <footer className="hairline mt-32">
-      <div className="mx-auto max-w-4xl px-6 md:px-10 py-14">
+    <footer className="hairline mt-24">
+      <div className="mx-auto max-w-3xl px-5 md:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           <div className="md:col-span-6">
             <p className="eyebrow">colophon</p>

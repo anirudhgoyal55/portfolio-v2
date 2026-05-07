@@ -9,7 +9,7 @@ import { NavLinks } from "./NavLinks";
 export function Header() {
   return (
     <header className="hairline-bottom sticky top-0 z-40 hidden md:block backdrop-blur-md bg-[color:var(--color-background)]/80">
-      <div className="mx-auto max-w-4xl px-6 md:px-10">
+      <div className="mx-auto max-w-3xl px-5 md:px-8">
         <div className="flex items-center justify-between h-12">
           <NavLinks />
           <div className="flex items-center gap-4">
