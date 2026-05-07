@@ -5,6 +5,8 @@ import { getAllWriting, getWriting } from "@/lib/content";
 import { MDXContent } from "@/components/content/MDXContent";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
+import { ReadingProgress } from "@/components/motion/ReadingProgress";
+import { RelatedPosts } from "@/components/writing/RelatedPosts";
 
 type Params = { slug: string };
 
@@ -68,6 +70,7 @@ export default async function PostPage({
 
   return (
     <article className="mx-auto max-w-3xl px-6 md:px-10 py-20 md:py-28">
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
@@ -108,7 +111,9 @@ export default async function PostPage({
         <MDXContent source={p.body} />
       </div>
 
-      <nav className="mt-20 hairline pt-8 flex items-center justify-between">
+      <RelatedPosts currentSlug={slug} tags={fm.tags} />
+
+      <nav className="mt-12 hairline pt-8 flex items-center justify-between">
         <Link href="/writing" className="link-underline text-sm opacity-80">
           ← All posts
         </Link>

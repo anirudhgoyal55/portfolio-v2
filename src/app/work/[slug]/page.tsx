@@ -5,6 +5,7 @@ import { getAllWork, getWork } from "@/lib/content";
 import { MDXContent } from "@/components/content/MDXContent";
 import { creativeWorkSchema, breadcrumbSchema } from "@/lib/seo";
 import { Reveal } from "@/components/motion/Reveal";
+import { RelatedWork } from "@/components/work/RelatedWork";
 
 type Params = { slug: string };
 
@@ -145,7 +146,9 @@ export default async function WorkDetailPage({
         <MDXContent source={w.body} />
       </div>
 
-      <nav className="mt-20 hairline pt-8 flex items-center justify-between">
+      <RelatedWork currentSlug={slug} />
+
+      <nav className="mt-12 hairline pt-8 flex items-center justify-between">
         <Link href="/work" className="link-underline text-sm opacity-80">
           ← All work
         </Link>

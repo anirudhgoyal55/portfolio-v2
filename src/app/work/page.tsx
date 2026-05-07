@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getAllWork } from "@/lib/content";
+import { getAllWork, type Work } from "@/lib/content";
 import { ProjectCard } from "@/components/work/ProjectCard";
 import { Reveal } from "@/components/motion/Reveal";
 
@@ -11,6 +11,20 @@ export const metadata: Metadata = {
 
 export default function WorkIndexPage() {
   const work = getAllWork();
+
+  // Group by year for visual separators in the list, preserving sort order
+  const groups: Array<{ year: number; items: Work[] }> = [];
+  for (const item of work) {
+    const last = groups[groups.length - 1];
+    if (last && last.year === item.frontmatter.year) {
+      last.items.push(item);
+    } else {
+      groups.push({ year: item.frontmatter.year, items: [item] });
+    }
+  }
+
+  let runningIndex = 0;
+
   return (
     <div className="mx-auto max-w-4xl px-6 md:px-10 py-16 md:py-20">
       <Reveal>
@@ -27,9 +41,22 @@ export default function WorkIndexPage() {
         </p>
       </Reveal>
 
-      <div className="mt-12">
-        {work.map((w, i) => (
-          <ProjectCard key={w.slug} work={w} index={i} />
+      <div className="mt-12 space-y-8">
+        {groups.map((group) => (
+          <section key={group.year}>
+            <h2
+              aria-label={`Year ${group.year}`}
+              className="font-mono text-[11px] lowercase tracking-widest opacity-50 mb-2"
+            >
+              {group.year}
+            </h2>
+            <div>
+              {group.items.map((w) => {
+                const idx = runningIndex++;
+                return <ProjectCard key={w.slug} work={w} index={idx} />;
+              })}
+            </div>
+          </section>
         ))}
       </div>
     </div>
