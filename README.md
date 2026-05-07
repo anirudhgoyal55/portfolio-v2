@@ -112,7 +112,7 @@ SPOTIFY_REFRESH_TOKEN=
 ```
 
 1. Create an app at [developer.spotify.com/dashboard](https://developer.spotify.com/dashboard)
-2. Add redirect URI: `http://localhost:8765/callback`
+2. Add redirect URI: `http://127.0.0.1:8765/callback` (use the loopback IP, **not** `localhost` — Spotify's modern policy rejects `http://localhost` for new apps)
 3. Add `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` to `.env.local`
 4. Run `node scripts/spotify-token.mjs` and follow the flow
 5. Paste the printed refresh token into `.env.local` as `SPOTIFY_REFRESH_TOKEN`

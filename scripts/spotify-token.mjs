@@ -5,7 +5,7 @@
  * Usage:
  *   1. Set SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET in .env.local
  *      (create app at https://developer.spotify.com/dashboard, add
- *      redirect URI: http://localhost:8765/callback)
+ *      redirect URI: http://127.0.0.1:8765/callback   ← loopback IP, NOT "localhost")
  *   2. Run: node scripts/spotify-token.mjs
  *   3. Open the URL printed in your terminal, authorize
  *   4. Copy the printed refresh token into .env.local as SPOTIFY_REFRESH_TOKEN
@@ -27,7 +27,8 @@ try {
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const PORT = 8765;
-const REDIRECT = `http://localhost:${PORT}/callback`;
+// Spotify requires loopback IP form (not "localhost") for non-HTTPS redirects.
+const REDIRECT = `http://127.0.0.1:${PORT}/callback`;
 const SCOPES = "user-read-currently-playing user-top-read user-read-recently-played";
 
 if (!CLIENT_ID || !CLIENT_SECRET) {
