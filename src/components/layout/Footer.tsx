@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "../../../site.config";
+import { VisitorCounter } from "./VisitorCounter";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -115,15 +116,18 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col md:flex-row items-baseline justify-between gap-3 hairline pt-6">
+        <div className="mt-12 flex flex-col md:flex-row items-baseline justify-between gap-3 hairline pt-6">
           <p className="font-mono text-[11px] lowercase opacity-60">
             © {year} {siteConfig.name}. all rights reserved.
           </p>
-          <p className="font-mono text-[11px] lowercase opacity-60">
-            press{" "}
-            <kbd className="px-1.5 py-0.5 border rounded-sm">⌘</kbd>{" "}
-            <kbd className="px-1.5 py-0.5 border rounded-sm">K</kbd> to navigate
-          </p>
+          <div className="flex items-center gap-4">
+            <VisitorCounter />
+            <p className="font-mono text-[11px] lowercase opacity-60">
+              press{" "}
+              <kbd className="px-1.5 py-0.5 border rounded-sm">⌘</kbd>{" "}
+              <kbd className="px-1.5 py-0.5 border rounded-sm">K</kbd> to navigate
+            </p>
+          </div>
         </div>
       </div>
     </footer>

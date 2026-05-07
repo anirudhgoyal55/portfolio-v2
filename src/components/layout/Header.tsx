@@ -2,6 +2,7 @@ import Link from "next/link";
 import { siteConfig } from "../../../site.config";
 import { ThemeToggle } from "./ThemeToggle";
 import { CommandTrigger } from "../command/CommandTrigger";
+import { MonogramMark } from "./MonogramMark";
 
 export function Header() {
   return (
@@ -10,10 +11,10 @@ export function Header() {
         <div className="flex items-center justify-between h-14">
           <Link
             href="/"
-            className="font-display text-[13px] tracking-[0.18em] uppercase hover:text-[color:var(--color-accent)] transition-colors"
             aria-label={`${siteConfig.name} — home`}
+            className="inline-flex items-center transition-transform hover:scale-[1.04]"
           >
-            {siteConfig.shortName}
+            <MonogramMark size={26} />
           </Link>
 
           <nav
@@ -24,7 +25,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="font-mono text-[11px] lowercase tracking-wide opacity-70 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
+                className="font-mono text-[11px] lowercase tracking-wide opacity-65 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
               >
                 {item.label.toLowerCase()}
               </Link>
@@ -46,7 +47,7 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="font-mono text-[11px] lowercase tracking-wide opacity-70 hover:opacity-100"
+              className="font-mono text-[11px] lowercase tracking-wide opacity-65 hover:opacity-100"
             >
               {item.label.toLowerCase()}
             </Link>

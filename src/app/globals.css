@@ -236,6 +236,41 @@ h6:hover .anchor-link {
   opacity: 1;
 }
 
+/* Now-playing waveform bars */
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.wave-bar {
+  display: inline-block;
+  width: 2px;
+  height: 100%;
+  background: currentColor;
+  border-radius: 999px;
+  transform-origin: bottom;
+  animation: wave 1.05s ease-in-out infinite;
+}
+
+/* View Transitions API — for hard navs and any UA-init nav */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Smooth color/theme switching across surfaces (no jank on toggle) */
+html {
+  transition: background-color 220ms ease;
+}
+
 /* Skip-to-content link (accessibility) */
 .skip-to-content {
   position: absolute;

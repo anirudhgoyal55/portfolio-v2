@@ -124,6 +124,12 @@ export function getWriting(slug: string): Writing | null {
   return getAllWriting().find((w) => w.slug === slug) ?? null;
 }
 
+export function getWritingByTag(tag: string): Writing[] {
+  return getAllWriting().filter((w) =>
+    (w.frontmatter.tags ?? []).includes(tag),
+  );
+}
+
 /* ---------- single MDX (now, uses, about) ---------- */
 
 export function getSingle(filename: string): {

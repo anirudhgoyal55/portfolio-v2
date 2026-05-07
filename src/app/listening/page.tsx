@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import Link from "next/link";
 import { SpotifyNowPlaying } from "@/components/integrations/SpotifyNowPlaying";
 import { SpotifyTopTracks } from "@/components/integrations/SpotifyTopTracks";
 import { LetterboxdFeed } from "@/components/integrations/LetterboxdFeed";
 import { GitHubFeed } from "@/components/integrations/GitHubFeed";
+import { PostCard } from "@/components/writing/PostCard";
 import { siteConfig } from "../../../site.config";
+import { getWritingByTag } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Listening",
   description:
-    "What I'm listening to, watching, and shipping. All live, all auto-updating.",
+    "What I'm listening to, watching, and shipping. All live, all auto-updating. Plus the occasional essay on an artist or album.",
 };
 
 export default function ListeningPage() {
+  const musicEssays = getWritingByTag("music");
+
   return (
     <div className="mx-auto max-w-4xl px-6 md:px-10 py-16 md:py-20">
       <p className="eyebrow">live</p>
@@ -58,6 +63,24 @@ export default function ListeningPage() {
           </section>
         )}
       </div>
+
+      {/* Music essays — auto-shows when posts tagged "music" exist */}
+      {musicEssays.length > 0 && (
+        <section className="mt-12 hairline pt-6">
+          <div className="flex items-baseline justify-between mb-3">
+            <h2 className="eyebrow">music essays</h2>
+            <Link
+              href="/writing"
+              className="font-mono text-[11px] lowercase opacity-60 hover:opacity-100"
+            >
+              all writing →
+            </Link>
+          </div>
+          {musicEssays.map((p) => (
+            <PostCard key={p.slug} post={p} />
+          ))}
+        </section>
+      )}
 
       {siteConfig.integrations.letterboxd.enabled && (
         <section className="mt-12 hairline pt-6">

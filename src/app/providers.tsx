@@ -3,6 +3,7 @@
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
 import { LenisProvider } from "@/components/motion/LenisProvider";
+import { CursorHalo } from "@/components/motion/CursorHalo";
 import { CommandMenu } from "@/components/command/CommandMenu";
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -15,6 +16,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     >
       <LenisProvider>
         {children}
+        <CursorHalo />
         <CommandMenu />
         <Toaster
           position="bottom-right"

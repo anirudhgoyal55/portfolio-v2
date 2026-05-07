@@ -5,6 +5,7 @@ import { getFeaturedWork, getAllWriting } from "@/lib/content";
 import { ProjectCard } from "@/components/work/ProjectCard";
 import { PostCard } from "@/components/writing/PostCard";
 import { SpotifyNowPlaying } from "@/components/integrations/SpotifyNowPlaying";
+import { Avatar } from "@/components/layout/Avatar";
 import { Reveal } from "@/components/motion/Reveal";
 
 export default function HomePage() {
@@ -14,17 +15,17 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-4xl px-6 md:px-10">
       {/* HERO */}
-      <section className="pt-12 md:pt-20 pb-16 md:pb-20">
+      <section className="pt-10 md:pt-16 pb-16 md:pb-20">
         <Reveal>
-          <p className="eyebrow">portfolio · {new Date().getFullYear()}</p>
+          <Avatar size={84} alt={siteConfig.name} className="mb-7" />
         </Reveal>
-        <Reveal delay={0.05} as="header">
-          <h1 className="mt-4 font-serif text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-[-0.01em] max-w-3xl">
+        <Reveal delay={0.04} as="header">
+          <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-[-0.01em] max-w-3xl">
             {siteConfig.name}.
           </h1>
         </Reveal>
         <Reveal delay={0.08}>
-          <p className="mt-3 text-base opacity-70 max-w-xl">
+          <p className="mt-2 text-base opacity-70">
             {siteConfig.role}.
           </p>
         </Reveal>
@@ -51,7 +52,7 @@ export default function HomePage() {
           </div>
         </Reveal>
 
-        {/* Live now-playing strip */}
+        {/* Live Spotify presence — icon always visible, song when playing */}
         <Reveal delay={0.24}>
           <div className="mt-12">
             <Suspense fallback={null}>

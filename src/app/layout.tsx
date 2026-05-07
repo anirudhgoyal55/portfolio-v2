@@ -7,6 +7,7 @@ import { Providers } from "./providers";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SkipToContent } from "@/components/layout/SkipToContent";
+import { PageTransition } from "@/components/motion/PageTransition";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -134,7 +135,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           <main id="main" className="flex-1">
-            {children}
+            <PageTransition>{children}</PageTransition>
           </main>
           <Footer />
         </Providers>
