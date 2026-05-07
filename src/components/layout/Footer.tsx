@@ -2,6 +2,7 @@ import Link from "next/link";
 import { siteConfig } from "../../../site.config";
 import { VisitorCounter } from "./VisitorCounter";
 import { SocialIcon, type SocialPlatform } from "./SocialIcon";
+import { Tooltip } from "@/components/ui/Tooltip";
 
 const PLATFORM_LABELS: Record<SocialPlatform, string> = {
   linkedin: "LinkedIn",
@@ -64,38 +65,44 @@ export function Footer() {
               .
             </p>
 
-            {/* Social icons — clean row, accent on hover */}
-            <ul className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+            {/* Social icons with tooltips on hover */}
+            <ul className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-2">
               {socials.map((s) => (
                 <li key={s.platform}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={PLATFORM_LABELS[s.platform]}
-                    className="inline-flex items-center justify-center w-8 h-8 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
-                  >
-                    <SocialIcon platform={s.platform} size={15} />
-                  </a>
+                  <Tooltip label={PLATFORM_LABELS[s.platform]}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={PLATFORM_LABELS[s.platform]}
+                      className="inline-flex items-center justify-center w-8 h-8 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
+                    >
+                      <SocialIcon platform={s.platform} size={15} />
+                    </a>
+                  </Tooltip>
                 </li>
               ))}
               <li>
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  aria-label="Email"
-                  className="inline-flex items-center justify-center w-8 h-8 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
-                >
-                  <SocialIcon platform="email" size={15} />
-                </a>
+                <Tooltip label="Email">
+                  <a
+                    href={`mailto:${siteConfig.email}`}
+                    aria-label="Email"
+                    className="inline-flex items-center justify-center w-8 h-8 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
+                  >
+                    <SocialIcon platform="email" size={15} />
+                  </a>
+                </Tooltip>
               </li>
               <li>
-                <Link
-                  href="/feed.xml"
-                  aria-label="RSS feed"
-                  className="inline-flex items-center justify-center w-8 h-8 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
-                >
-                  <SocialIcon platform="rss" size={15} />
-                </Link>
+                <Tooltip label="RSS feed">
+                  <Link
+                    href="/feed.xml"
+                    aria-label="RSS feed"
+                    className="inline-flex items-center justify-center w-8 h-8 rounded-sm opacity-60 hover:opacity-100 hover:text-[color:var(--color-accent)] transition-all"
+                  >
+                    <SocialIcon platform="rss" size={15} />
+                  </Link>
+                </Tooltip>
               </li>
             </ul>
           </div>
