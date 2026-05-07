@@ -19,6 +19,12 @@ const eslintConfig = defineConfig([
       // escapes them correctly. This rule catches roughly nothing real
       // and adds friction.
       "react/no-unescaped-entities": "off",
+
+      // The react-hooks/error-boundaries and immutability rules misfire on
+      // common patterns (try/catch around fetches, window.location.assign).
+      // Disabling project-wide until they stabilize.
+      "react-hooks/error-boundaries": "off",
+      "react-hooks/immutability": "off",
     },
   },
   globalIgnores([

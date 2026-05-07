@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
-import { sendMessage } from "./actions";
+import { siteConfig } from "../../../site.config";
 
 const schema = z.object({
   name: z.string().min(1, "Name required").max(100),
@@ -16,46 +16,45 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+/**
+ * Contact form. On submit, opens the user's mail client with the message
+ * pre-filled. Static-export friendly (no server action).
+ *
+ * To wire real email/Telegram delivery, redeploy on a host with server
+ * functions (Vercel, Workers Paid, etc.) and reintroduce server actions.
+ */
 export function ContactForm() {
-  const [pending, startTransition] = useTransition();
   const [done, setDone] = useState(false);
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = (data: FormData) => {
-    startTransition(async () => {
-      const fd = new FormData();
-      fd.set("name", data.name);
-      fd.set("email", data.email);
-      fd.set("message", data.message);
-      if (data.honeypot) fd.set("honeypot", data.honeypot);
-
-      const res = await sendMessage(fd);
-      if (res.ok) {
-        toast.success("Message sent. I'll write back soon.");
-        reset();
-        setDone(true);
-      } else {
-        toast.error(res.error ?? "Could not send. Email me directly?");
-      }
-    });
+    if (data.honeypot) {
+      setDone(true);
+      return;
+    }
+    const subject = encodeURIComponent(`Portfolio: ${data.name}`);
+    const body = encodeURIComponent(
+      `From: ${data.name} <${data.email}>\n\n${data.message}`,
+    );
+    window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
+    toast.success("Opening your email client…");
+    setDone(true);
   };
 
   if (done) {
     return (
       <div className="mt-10 hairline pt-8">
-        <p className="font-serif text-xl">Thanks. I'll write back soon.</p>
+        <p className="font-serif text-xl">Thanks. I&rsquo;ll write back soon.</p>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-10 max-w-lg space-y-5">
-      {/* Honeypot — hidden from real users, catches bots */}
       <input
         type="text"
         tabIndex={-1}
@@ -66,10 +65,7 @@ export function ContactForm() {
       />
 
       <div>
-        <label
-          htmlFor="name"
-          className="eyebrow block mb-1.5"
-        >
+        <label htmlFor="name" className="eyebrow block mb-1.5">
           name
         </label>
         <input
@@ -123,10 +119,9 @@ export function ContactForm() {
 
       <button
         type="submit"
-        disabled={pending}
-        className="font-mono text-[12px] lowercase tracking-wide px-5 py-2.5 border border-current hover:bg-[color:var(--color-accent)] hover:text-[color:var(--color-paper)] hover:border-[color:var(--color-accent)] transition-all disabled:opacity-50 disabled:cursor-wait"
+        className="font-mono text-[12px] lowercase tracking-wide px-5 py-2.5 border border-current hover:bg-[color:var(--color-accent)] hover:text-[color:var(--color-paper)] hover:border-[color:var(--color-accent)] transition-all active:scale-[0.97]"
       >
-        {pending ? "sending…" : "send message →"}
+        send message →
       </button>
     </form>
   );
