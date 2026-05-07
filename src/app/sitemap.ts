@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "../../site.config";
 import { getAllWork, getAllWriting, getAllExperience } from "@/lib/content";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
   const now = new Date();
