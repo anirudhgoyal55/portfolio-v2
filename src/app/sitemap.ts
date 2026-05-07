@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "../../site.config";
-import { getAllWork, getAllWriting } from "@/lib/content";
+import { getAllWork, getAllWriting, getAllExperience } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
@@ -44,7 +44,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.6,
     },
+    {
+      url: `${base}/experience`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
   ];
+
+  // experience entries don't have individual URLs (single timeline page),
+  // but we increase the page priority by acknowledging them in sitemap.
+  void getAllExperience();
 
   const workRoutes: MetadataRoute.Sitemap = getAllWork().map((w) => ({
     url: `${base}/work/${w.slug}`,

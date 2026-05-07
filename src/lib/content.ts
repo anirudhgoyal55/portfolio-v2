@@ -130,6 +130,46 @@ export function getWritingByTag(tag: string): Writing[] {
   );
 }
 
+/* ---------- experience (timeline) ---------- */
+
+export type ExperienceFrontmatter = {
+  company: string;
+  role: string;
+  startDate: string; // ISO yyyy-mm or yyyy-mm-dd
+  endDate: string; // ISO or "present"
+  location?: string;
+  url?: string;
+  order?: number;
+  draft?: boolean;
+};
+
+export type Experience = {
+  slug: string;
+  frontmatter: ExperienceFrontmatter;
+  body: string;
+};
+
+export function getAllExperience(): Experience[] {
+  const items = readFolder("experience")
+    .map((f) => {
+      const { data, content } = matter(f.raw);
+      return {
+        slug: f.slug,
+        frontmatter: data as ExperienceFrontmatter,
+        body: content,
+      };
+    })
+    .filter((e) => !e.frontmatter.draft);
+
+  return items.sort((a, b) => {
+    const cmp =
+      new Date(b.frontmatter.startDate).getTime() -
+      new Date(a.frontmatter.startDate).getTime();
+    if (cmp !== 0) return cmp;
+    return (a.frontmatter.order ?? 99) - (b.frontmatter.order ?? 99);
+  });
+}
+
 /* ---------- single MDX (now, uses, about) ---------- */
 
 export function getSingle(filename: string): {
