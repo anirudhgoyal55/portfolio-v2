@@ -8,6 +8,7 @@ import { SpotifyNowPlaying } from "@/components/integrations/SpotifyNowPlaying";
 import { Avatar } from "@/components/layout/Avatar";
 import { SocialIcon, type SocialPlatform } from "@/components/layout/SocialIcon";
 import { Reveal } from "@/components/motion/Reveal";
+import { ScrollHero } from "@/components/motion/ScrollHero";
 
 const HERO_SOCIAL_ORDER: SocialPlatform[] = [
   "linkedin",
@@ -46,25 +47,27 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-4xl px-6 md:px-10">
       {/* HERO */}
-      <section className="pt-10 md:pt-16 pb-16 md:pb-20">
-        {/* Avatar + name + role on a single row */}
-        <Reveal>
-          <header className="flex items-center gap-5">
-            <Avatar
-              size={84}
-              alt={siteConfig.name}
-              className="shrink-0 ring-1 ring-[color:var(--color-border)]"
-            />
-            <div className="min-w-0">
-              <h1 className="font-serif text-[clamp(1.75rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.01em]">
-                {siteConfig.name}.
-              </h1>
-              <p className="mt-1 text-sm sm:text-base opacity-70">
-                {siteConfig.role}.
-              </p>
-            </div>
-          </header>
-        </Reveal>
+      <section className="pt-10 md:pt-16 pb-12 md:pb-16">
+        {/* Avatar + name + role on a single row, with subtle scroll-link */}
+        <ScrollHero>
+          <Reveal>
+            <header className="flex items-center gap-5">
+              <Avatar
+                size={84}
+                alt={siteConfig.name}
+                className="shrink-0 ring-1 ring-[color:var(--color-border)]"
+              />
+              <div className="min-w-0">
+                <h1 className="font-serif text-[clamp(1.75rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.01em]">
+                  {siteConfig.name}.
+                </h1>
+                <p className="mt-1 text-sm sm:text-base opacity-70">
+                  {siteConfig.role}.
+                </p>
+              </div>
+            </header>
+          </Reveal>
+        </ScrollHero>
 
         {/* Tagline */}
         <Reveal delay={0.08}>
