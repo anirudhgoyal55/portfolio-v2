@@ -91,10 +91,10 @@ export default async function WorkDetailPage({
       </Reveal>
 
       <Reveal delay={0.05} as="header">
-        <h1 className="mt-5 font-serif text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05] tracking-[-0.01em]">
+        <h1 className="mt-4 font-serif text-[clamp(1.75rem,4.5vw,3rem)] leading-[1.1] tracking-[-0.01em]">
           {fm.title}
         </h1>
-        <p className="mt-4 text-xl opacity-80 max-w-2xl">{fm.description}</p>
+        <p className="mt-3 text-lg opacity-80 max-w-2xl">{fm.description}</p>
       </Reveal>
 
       <Reveal delay={0.1}>

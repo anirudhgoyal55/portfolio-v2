@@ -24,7 +24,7 @@ export function Footer() {
 
   return (
     <footer className="hairline mt-32">
-      <div className="mx-auto max-w-6xl px-6 md:px-10 py-14">
+      <div className="mx-auto max-w-4xl px-6 md:px-10 py-14">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           <div className="md:col-span-5">
             <p className="eyebrow">colophon</p>

@@ -15,9 +15,9 @@ export default function UsesPage() {
   const { frontmatter, body } = single;
 
   return (
-    <div className="mx-auto max-w-3xl px-6 md:px-10 py-20 md:py-28">
+    <div className="mx-auto max-w-3xl px-6 md:px-10 py-16 md:py-20">
       <p className="eyebrow">uses</p>
-      <h1 className="mt-4 font-serif text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05]">
+      <h1 className="mt-3 font-serif text-[clamp(2rem,5vw,3.5rem)] leading-[1.1]">
         {frontmatter.title}
       </h1>
       {frontmatter.updatedAt && (

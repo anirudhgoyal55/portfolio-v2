@@ -12,22 +12,22 @@ export const metadata: Metadata = {
 export default function WritingIndexPage() {
   const posts = getAllWriting();
   return (
-    <div className="mx-auto max-w-6xl px-6 md:px-10 py-20 md:py-28">
+    <div className="mx-auto max-w-4xl px-6 md:px-10 py-16 md:py-20">
       <Reveal>
         <p className="eyebrow">writing / {String(posts.length).padStart(2, "0")}</p>
       </Reveal>
       <Reveal delay={0.05}>
-        <h1 className="mt-4 font-serif text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-[-0.01em] max-w-3xl">
+        <h1 className="mt-3 font-serif text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-[-0.01em] max-w-2xl">
           Writing
         </h1>
       </Reveal>
       <Reveal delay={0.1}>
-        <p className="mt-5 max-w-2xl text-lg opacity-80">
+        <p className="mt-4 max-w-xl text-base opacity-80">
           Notes from the work, and the rare opinion.
         </p>
       </Reveal>
 
-      <div className="mt-16">
+      <div className="mt-12">
         {posts.length === 0 ? (
           <p className="font-mono text-sm opacity-60">No posts yet.</p>
         ) : (

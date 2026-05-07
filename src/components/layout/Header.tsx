@@ -6,7 +6,7 @@ import { CommandTrigger } from "../command/CommandTrigger";
 export function Header() {
   return (
     <header className="hairline-bottom sticky top-0 z-40 backdrop-blur-md bg-[color:var(--color-background)]/80">
-      <div className="mx-auto max-w-6xl px-6 md:px-10">
+      <div className="mx-auto max-w-4xl px-6 md:px-10">
         <div className="flex items-center justify-between h-14">
           <Link
             href="/"

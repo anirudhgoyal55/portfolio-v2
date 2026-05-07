@@ -37,8 +37,8 @@ const cinzel = Cinzel({
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F4ECDF" },
-    { media: "(prefers-color-scheme: dark)", color: "#0E0C09" },
+    { media: "(prefers-color-scheme: light)", color: "#FBFBFA" },
+    { media: "(prefers-color-scheme: dark)", color: "#0F0E0D" },
   ],
   width: "device-width",
   initialScale: 1,

@@ -15,7 +15,7 @@ export default function Icon() {
           alignItems: "center",
           justifyContent: "center",
           background: siteConfig.accent,
-          color: "#F4ECDF",
+          color: "#FBFBFA",
           fontSize: 22,
           fontWeight: 600,
           fontFamily: "Georgia, serif",

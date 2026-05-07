@@ -86,8 +86,8 @@ export default async function PostPage({
         ← writing
       </Link>
 
-      <header className="mt-5">
-        <h1 className="font-serif text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05] tracking-[-0.01em]">
+      <header className="mt-4">
+        <h1 className="font-serif text-[clamp(1.75rem,4.5vw,3rem)] leading-[1.1] tracking-[-0.01em]">
           {fm.title}
         </h1>
         <div className="mt-4 flex items-center gap-3 text-sm">

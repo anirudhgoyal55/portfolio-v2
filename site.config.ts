@@ -35,7 +35,7 @@ export const siteConfig = {
 
   /* ---------- theme ---------- */
   // Single accent color used throughout. Swap freely.
-  accent: "#B85945", // terra rust
+  accent: "#C2724A", // muted copper-orange
   accentName: "ember",
 
   /* ---------- navigation ---------- */

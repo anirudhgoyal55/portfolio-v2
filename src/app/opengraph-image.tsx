@@ -15,8 +15,8 @@ export default async function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#F4ECDF",
-          color: "#14110E",
+          background: "#FBFBFA",
+          color: "#1A1815",
           fontFamily: "Georgia, serif",
           padding: "80px",
         }}
@@ -27,7 +27,7 @@ export default async function OpenGraphImage() {
             fontSize: 18,
             letterSpacing: 4,
             textTransform: "uppercase",
-            color: "rgba(20,17,14,0.55)",
+            color: "rgba(26,24,21,0.55)",
           }}
         >
           {siteConfig.shortName.toUpperCase()}
@@ -42,7 +42,7 @@ export default async function OpenGraphImage() {
           <div
             style={{
               display: "flex",
-              fontSize: 96,
+              fontSize: 88,
               lineHeight: 1.05,
               fontStyle: "italic",
               letterSpacing: -0.5,
@@ -54,9 +54,9 @@ export default async function OpenGraphImage() {
           <div
             style={{
               display: "flex",
-              fontSize: 36,
-              color: "rgba(20,17,14,0.7)",
-              marginTop: 20,
+              fontSize: 32,
+              color: "rgba(26,24,21,0.7)",
+              marginTop: 18,
               maxWidth: 900,
             }}
           >
@@ -70,15 +70,15 @@ export default async function OpenGraphImage() {
             justifyContent: "space-between",
             alignItems: "flex-end",
             fontSize: 22,
-            color: "rgba(20,17,14,0.5)",
+            color: "rgba(26,24,21,0.5)",
           }}
         >
           <div style={{ display: "flex" }}>{siteConfig.domain}</div>
           <div
             style={{
               display: "flex",
-              width: 60,
-              height: 60,
+              width: 56,
+              height: 56,
               borderRadius: 9999,
               background: siteConfig.accent,
             }}

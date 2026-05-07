@@ -4,6 +4,17 @@ A template-grade personal portfolio. Next.js 16, Tailwind v4, MDX content, live 
 
 Originally built as **[Anirudh Goel's](https://anirudhgoel.xyz) personal site**. Open-sourced because the gaps in other portfolio templates were avoidable and worth fixing once, properly.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![React 19](https://img.shields.io/badge/React-19-149eca?logo=react)
+![Tailwind v4](https://img.shields.io/badge/Tailwind-v4-38bdf8?logo=tailwindcss)
+
+## One-click deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fanirudhgoyal55%2Fportfolio-v2&project-name=portfolio&repository-name=portfolio&env=NEXT_PUBLIC_SITE_URL,SPOTIFY_CLIENT_ID,SPOTIFY_CLIENT_SECRET,SPOTIFY_REFRESH_TOKEN,RESEND_API_KEY,CONTACT_EMAIL_TO&envDescription=All%20env%20vars%20are%20optional.%20Each%20integration%20gracefully%20disables%20when%20its%20vars%20are%20missing.&envLink=https%3A%2F%2Fgithub.com%2Fanirudhgoyal55%2Fportfolio-v2%2Fblob%2Fmain%2F.env.example)
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/anirudhgoyal55/portfolio-v2)
+
 ## Features
 
 - **Next.js 16** (App Router, Turbopack) + **React 19** + **TypeScript 5**
